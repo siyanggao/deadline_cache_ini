@@ -12,11 +12,11 @@ c++ based on https://github.com/brofield/simpleini
 
 # install
 kotlin  
-import ini4j to your project,gradle or maven
+import ini4j to your project,gradle or maven  
 copy com.gsy.ini file to your project.com.gsy.ini location is inilibrary/src/main/java
 
 c++  
-copy ini file to your project.ini file location is inilibrary/src/main/cpp
+copy ini file to your project.ini file location is inilibrary/src/main/cpp  
 edit your makefile or cmake script
 
 # usage
