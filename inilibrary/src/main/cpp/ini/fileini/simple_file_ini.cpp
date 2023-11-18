@@ -8,7 +8,9 @@ string SimpleFileIni::GetStringValue(const string& section,const string& key,con
     lock_guard<mutex> lock(mutex_);
     if(!LoadIniFile()) return default_value;
     const char *value = ini.GetValue(section.c_str(),key.c_str(),default_value.c_str());
-    return value;
+    string ret = string(value);
+    ini.Reset();
+    return ret;
 }
 
 bool SimpleFileIni::SetStringValue(const string& section, const string& key, const string& value) {
@@ -21,6 +23,7 @@ bool SimpleFileIni::SetStringValue(const string& section, const string& key, con
         return false;
     }
     if(!SaveIniFile()) return false;
+    ini.Reset();
     return true;
 }
 bool SimpleFileIni::EraseValue(const string& section, const string& key) {
@@ -50,6 +53,7 @@ bool SimpleFileIni::SetIntValue(const string& section, const string& key,const i
         return false;
     }
     if(!SaveIniFile()) return false;
+    ini.Reset();
     return true;
 }
 bool SimpleFileIni::GetBoolValue(const string& section, const string& key, const bool& default_value) {
@@ -68,6 +72,7 @@ bool SimpleFileIni::SetBoolValue(const string& section, const string& key, const
         return false;
     }
     if(!SaveIniFile()) return false;
+    ini.Reset();
     return true;
 }
 
@@ -106,6 +111,7 @@ bool SimpleFileIni::SetDoubleValue(const string& section, const string& key, con
         return false;
     }
     if(!SaveIniFile()) return false;
+    ini.Reset();
     return true;
 }
 
@@ -126,6 +132,7 @@ bool SimpleFileIni::SetLongValue(const string& section, const string& key, const
         return false;
     }
     if(!SaveIniFile()) return false;
+    ini.Reset();
     return true;
 }
 
