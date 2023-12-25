@@ -1,7 +1,8 @@
 #include "simple_file_ini.h"
 
-SimpleFileIni::SimpleFileIni(const string& filepath) {
+SimpleFileIni::SimpleFileIni(const string& filepath,const bool& have_space) {
     file_path = filepath;
+    this->have_space = have_space;
 }
 
 string SimpleFileIni::GetStringValue(const string& section,const string& key,const string& default_value){
@@ -91,6 +92,7 @@ bool SimpleFileIni::LoadIniFile() {
 //        LOGE("ini load file %s failed",file_path.c_str())
         return false;
     }
+    ini.SetSpaces(have_space);
     return true;
 }
 

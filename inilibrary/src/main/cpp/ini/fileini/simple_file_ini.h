@@ -14,7 +14,7 @@ using std::fstream;
 
 class SimpleFileIni : public FileIniInterface{
 public:
-    SimpleFileIni(const string& filepath);
+    SimpleFileIni(const string& filepath,const bool& have_space);
     ~SimpleFileIni();
     string GetStringValue(const string& section,const string& key,const string& default_value) override;
     bool SetStringValue(const string& section,const string& key,const string& value) override;
@@ -32,6 +32,7 @@ private:
     CSimpleIniA ini;
     mutex mutex_;
     string file_path;
+    bool have_space;
     bool LoadIniFile();
     bool SaveIniFile();
     bool CheckFileExist();

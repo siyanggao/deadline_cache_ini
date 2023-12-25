@@ -1,9 +1,9 @@
 #include "ini_data_store.h"
 
-IniDataStore::IniDataStore(const string& ini_path, const int& deadline_time, CacheInterface *cache){
+IniDataStore::IniDataStore(const string& ini_path, const int& deadline_time, CacheInterface *cache, const bool& have_space){
     lru_cache = cache;
     deadline_cache = new DeadlineCache(deadline_time, lru_cache);
-    file_ini = new SimpleFileIni(ini_path);
+    file_ini = new SimpleFileIni(ini_path, have_space);
 }
 
 string IniDataStore::GetStringValue(const string& section, const string& key, const string& default_value) {

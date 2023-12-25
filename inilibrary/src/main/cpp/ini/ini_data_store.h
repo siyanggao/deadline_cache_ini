@@ -15,7 +15,7 @@ public:
      * @param deadline_time deadline time in millisecond
      * @param cache cache
      */
-    IniDataStore(const string& ini_path, const int& deadline_time = 10 * 1000, CacheInterface *cache = new SimpleLruCache());
+    IniDataStore(const string& ini_path, const int& deadline_time = 10 * 1000, CacheInterface *cache = new SimpleLruCache(), const bool& have_space = true);
     ~IniDataStore();
     string GetStringValue(const string& section,const string& key,const string& default_value) override;
     bool SetStringValue(const string& section,const string& key,const string& default_value) override;
