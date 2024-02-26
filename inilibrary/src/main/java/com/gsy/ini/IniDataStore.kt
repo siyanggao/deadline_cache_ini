@@ -11,11 +11,11 @@ class IniDataStore(
     iniPath:String,
     deadlineTime:Long = 10 * 1000L,
     cache:CacheInterface = SimpleLruCache()
-) : FileIniInterface {
+) {
     private val deadlineCache = DeadlineCache(deadlineTime,cache)
     private val fileIni = WiniFile(iniPath)
 
-    override fun <T> getValue(section: String, key: String, defaultValue: T): T {
+    fun <T> getValue(section: String, key: String, defaultValue: T): T {
         val cachedValue = deadlineCache.get("$section-$key")
         if(cachedValue != null){
 //            Log.i("tag","cache hit")
@@ -28,14 +28,22 @@ class IniDataStore(
         return ret
     }
 
-    override fun <T> setValue(section: String, key: String, value: T): Boolean {
+    fun <T> setValue(section: String, key: String, value: T): Boolean {
         deadlineCache.erase("$section-$key")
         return fileIni.setValue(section, key, value)
     }
 
-    override fun erase(section: String, key: String): Boolean {
+    fun erase(section: String, key: String): Boolean {
         fileIni.erase(section, key)
         deadlineCache.erase(key)
         return true
+    }
+
+    fun resetCache(section: String, key: String){
+        deadlineCache.erase("$section-$key");
+    }
+
+    fun resetCache(){
+        deadlineCache.clear()
     }
 }

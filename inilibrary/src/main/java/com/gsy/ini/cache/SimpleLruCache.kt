@@ -35,6 +35,11 @@ class SimpleLruCache(private val maxSize:Int = 100) : CacheInterface {
         useTime.remove(key)
     }
 
+    override fun clear() {
+        data.clear()
+        useTime.clear()
+    }
+
     fun size():Int{
         return data.size
     }

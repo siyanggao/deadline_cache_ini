@@ -22,6 +22,7 @@ public:
     long GetLongValue(const string& key) override;
     bool SetLongValue(const string& key,const long& value) override;
     void EraseValue(const string& key) override;
+    void Clear() override;
 
 private:
     int max_size;

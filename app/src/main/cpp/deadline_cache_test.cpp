@@ -18,7 +18,7 @@ void DeadlineCacheTest::Test() {
     deadline_cache->SetIntValue("test_key",1);
     auto value = deadline_cache->GetIntValue("test_key");
     assert(value == 1);
-    usleep(deadline_time * 1000);
+    usleep((deadline_time + 1) * 1000);
     try {
         deadline_cache->GetIntValue("test_key");
         assert(false);

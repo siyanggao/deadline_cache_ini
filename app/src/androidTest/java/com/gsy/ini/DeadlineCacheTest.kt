@@ -17,7 +17,7 @@ class DeadlineCacheTest {
         deadlineCache.put("test_key","test_value")
         var value = deadlineCache.get("test_key")
         Assert.assertEquals(value,"test_value")
-        Thread.sleep(deadlineTime)
+        Thread.sleep(deadlineTime + 1)
         value = deadlineCache.get("test_key")
         Assert.assertEquals(value,null)
     }

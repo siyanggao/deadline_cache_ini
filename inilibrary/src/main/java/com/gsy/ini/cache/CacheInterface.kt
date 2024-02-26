@@ -7,4 +7,6 @@ interface CacheInterface {
     fun put(key: String, value: Any)
 
     fun erase(key: String)
+
+    fun clear()
 }

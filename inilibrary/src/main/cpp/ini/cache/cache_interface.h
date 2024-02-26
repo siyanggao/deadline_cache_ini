@@ -17,5 +17,6 @@ public:
     virtual bool SetLongValue(const string& key,const long& value) = 0;
     virtual void EraseValue(const string& key) = 0;
     virtual ~CacheInterface() {};
+    virtual void Clear() = 0;
 };
 #endif //INI_CACHE_INTERFACE_H

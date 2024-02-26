@@ -99,6 +99,11 @@ void DeadlineCache::EraseValue(const string& key) {
     insert_time.erase(key);
 }
 
+void DeadlineCache::Clear() {
+    cache->Clear();
+    insert_time.clear();
+}
+
 int64_t DeadlineCache::GetCurrentTimeMs() {
     struct timeval tv;
     gettimeofday(&tv,NULL);

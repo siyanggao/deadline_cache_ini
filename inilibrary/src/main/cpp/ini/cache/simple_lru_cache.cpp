@@ -143,6 +143,15 @@ void SimpleLruCache::EraseValue(const string& key) {
     usetime.erase(key);
 }
 
+void SimpleLruCache::Clear(){
+    data_str.clear();
+    data_int.clear();
+    data_bool.clear();
+    data_double.clear();
+    data_long.clear();
+    usetime.clear();
+}
+
 int SimpleLruCache::GetCurrentTime() {
     struct timeval tv;
     gettimeofday(&tv,NULL);

@@ -93,6 +93,13 @@ bool IniDataStore::EraseValue(const string& section, const string& key) {
     return file_ini->EraseValue(section,key);
 }
 
+bool IniDataStore::ResetCache(const string& section,const string& key){
+    deadline_cache->EraseValue(section + "-" + key);
+}
+bool IniDataStore::ResetCache(){
+    deadline_cache->Clear();
+}
+
 IniDataStore::~IniDataStore() {
     delete deadline_cache;
     delete file_ini;

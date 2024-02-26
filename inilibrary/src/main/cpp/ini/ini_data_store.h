@@ -29,6 +29,9 @@ public:
     bool SetLongValue(const string& section,const string& key,const long& value) override;
     bool EraseValue(const string& section,const string& key) override;
 
+    bool ResetCache(const string& section,const string& key);
+    bool ResetCache();
+
 private:
     CacheInterface *lru_cache;
     DeadlineCache *deadline_cache;

@@ -26,4 +26,9 @@ class DeadlineCache(
         cache.erase(key)
         insertTime.remove(key)
     }
+
+    override fun clear() {
+        cache.clear()
+        insertTime.clear()
+    }
 }
