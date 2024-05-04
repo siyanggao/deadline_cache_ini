@@ -7,7 +7,7 @@ SimpleLruCache::SimpleLruCache(const int& max_size) : max_size(max_size){
 string SimpleLruCache::GetStringValue(const string& key) {
     map<string,string>::iterator iter = data_str.find(key);
     if(iter != data_str.end()){
-        usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+        usetime[key] = GetCurrentTime();
         return iter->second;
     }else{
         throw key;
@@ -15,11 +15,8 @@ string SimpleLruCache::GetStringValue(const string& key) {
 }
 
 bool SimpleLruCache::SetStringValue(const string& key, const string& value) {
-    auto insert_ret = data_str.insert(std::pair<string,string>(key,value));
-    if(!insert_ret.second){
-        return false;
-    }
-    usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+    data_str[key] = value;
+    usetime[key] = GetCurrentTime();
     while(data_str.size() > max_size){
         auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
             return left.second < right.second;
@@ -33,7 +30,7 @@ bool SimpleLruCache::SetStringValue(const string& key, const string& value) {
 int SimpleLruCache::GetIntValue(const string& key) {
     map<string,int>::iterator iter = data_int.find(key);
     if(iter != data_int.end()){
-        usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+        usetime[key] = GetCurrentTime();
         return iter->second;
     }else{
         throw key;
@@ -45,7 +42,8 @@ bool SimpleLruCache::SetIntValue(const string& key, const int& value) {
     if(!insert_ret.second){
         return false;
     }
-    usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+    data_int[key] = value;
+    usetime[key] = GetCurrentTime();
     while(data_int.size() > max_size){
         auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
             return left.second < right.second;
@@ -59,7 +57,7 @@ bool SimpleLruCache::SetIntValue(const string& key, const int& value) {
 bool SimpleLruCache::GetBoolValue(const string& key) {
     map<string,bool>::iterator iter = data_bool.find(key);
     if(iter != data_bool.end()){
-        usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+        usetime[key] = GetCurrentTime();
         return iter->second;
     }else{
         throw key;
@@ -67,11 +65,8 @@ bool SimpleLruCache::GetBoolValue(const string& key) {
 }
 
 bool SimpleLruCache::SetBoolValue(const string& key, const bool& value) {
-    auto insert_ret = data_bool.insert(std::pair<string,bool>(key,value));
-    if(!insert_ret.second){
-        return false;
-    }
-    usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+    data_bool[key] = value;
+    usetime[key] = GetCurrentTime();
     while(data_bool.size() > max_size){
         auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
             return left.second < right.second;
@@ -85,7 +80,7 @@ bool SimpleLruCache::SetBoolValue(const string& key, const bool& value) {
 double SimpleLruCache::GetDoubleValue(const string& key) {
     map<string,double>::iterator iter = data_double.find(key);
     if(iter != data_double.end()){
-        usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+        usetime[key] = GetCurrentTime();
         return iter->second;
     }else{
         throw key;
@@ -93,11 +88,8 @@ double SimpleLruCache::GetDoubleValue(const string& key) {
 }
 
 bool SimpleLruCache::SetDoubleValue(const string& key, const double& value) {
-    auto insert_ret = data_double.insert(std::pair<string,double>(key,value));
-    if(!insert_ret.second){
-        return false;
-    }
-    usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+    data_double[key] = value;
+    usetime[key] = GetCurrentTime();
     while(data_double.size() > max_size){
         auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
             return left.second < right.second;
@@ -111,7 +103,7 @@ bool SimpleLruCache::SetDoubleValue(const string& key, const double& value) {
 long SimpleLruCache::GetLongValue(const string& key) {
     map<string,long>::iterator iter = data_long.find(key);
     if(iter != data_long.end()){
-        usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+        usetime[key] = GetCurrentTime();
         return iter->second;
     }else{
         throw key;
@@ -119,11 +111,8 @@ long SimpleLruCache::GetLongValue(const string& key) {
 }
 
 bool SimpleLruCache::SetLongValue(const string& key, const long& value) {
-    auto insert_ret = data_long.insert(std::pair<string,long>(key,value));
-    if(!insert_ret.second){
-        return false;
-    }
-    usetime.insert(std::pair<string,int>(key,GetCurrentTime()));
+    data_long[key] = value;
+    usetime[key] = GetCurrentTime();
     while(data_long.size() > max_size){
         auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
             return left.second < right.second;

@@ -18,7 +18,7 @@ string DeadlineCache::GetStringValue(const string& key) {
 
 bool DeadlineCache::SetStringValue(const string& key, const string& value) {
     auto ret = cache->SetStringValue(key,value);
-    insert_time.insert(std::pair<string,int64_t>(key,GetCurrentTimeMs()));
+    insert_time[key] = GetCurrentTimeMs();
     return ret;
 }
 
@@ -36,7 +36,7 @@ int DeadlineCache::GetIntValue(const string& key) {
 
 bool DeadlineCache::SetIntValue(const string& key, const int& value) {
     auto ret = cache->SetIntValue(key,value);
-    insert_time.insert(std::pair<string,int64_t>(key,GetCurrentTimeMs()));
+    insert_time[key] = GetCurrentTimeMs();
     return ret;
 }
 
@@ -54,7 +54,7 @@ bool DeadlineCache::GetBoolValue(const string& key) {
 
 bool DeadlineCache::SetBoolValue(const string& key, const bool& value) {
     auto ret = cache->SetBoolValue(key,value);
-    insert_time.insert(std::pair<string,int64_t>(key,GetCurrentTimeMs()));
+    insert_time[key] = GetCurrentTimeMs();
     return ret;
 }
 
@@ -72,7 +72,7 @@ double DeadlineCache::GetDoubleValue(const string& key) {
 
 bool DeadlineCache::SetDoubleValue(const string& key, const double& value) {
     auto ret = cache->SetDoubleValue(key,value);
-    insert_time.insert(std::pair<string,int64_t>(key,GetCurrentTimeMs()));
+    insert_time[key] = GetCurrentTimeMs();
     return ret;
 }
 
@@ -90,7 +90,7 @@ long DeadlineCache::GetLongValue(const string& key) {
 
 bool DeadlineCache::SetLongValue(const string& key, const long& value) {
     auto ret = cache->SetLongValue(key,value);
-    insert_time.insert(std::pair<string,int64_t>(key,GetCurrentTimeMs()));
+    insert_time[key] = GetCurrentTimeMs();
     return ret;
 }
 

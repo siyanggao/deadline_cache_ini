@@ -27,7 +27,7 @@ class IniTest {
         val iniPath = appContext.getExternalFilesDir(null)!!.absolutePath + File.separator + "config.ini"
         iniDataStore = IniDataStore(iniPath,deadlineTime)
 
-        iniDataStore.erase("test","int_test");
+        iniDataStore.erase("test","int_test")
         iniDataStore.setValue("test","int_test",2)
         for(i in 0..100){
             val value = iniDataStore.getValue("test","int_test",-1)
@@ -68,6 +68,13 @@ class IniTest {
         }
 
         deadlineCacheTest.test()
+
+        nativeTest()
+    }
+
+    private fun nativeTest(){
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        val iniPath = appContext.getExternalFilesDir(null)!!.absolutePath + File.separator + "config.ini"
         IniNativeLibrary().test(iniPath)
     }
 }
