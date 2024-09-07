@@ -5,7 +5,7 @@ import com.gsy.ini.cache.CacheInterface
 import com.gsy.ini.cache.DeadlineCache
 import com.gsy.ini.cache.SimpleLruCache
 import com.gsy.ini.fileini.FileIniInterface
-import com.gsy.ini.fileini.WiniFile
+import com.gsy.ini.fileini.FirstIniFile
 
 class IniDataStore(
     iniPath:String,
@@ -13,7 +13,7 @@ class IniDataStore(
     cache:CacheInterface = SimpleLruCache()
 ) {
     private val deadlineCache = DeadlineCache(deadlineTime,cache)
-    private val fileIni = WiniFile(iniPath)
+    private val fileIni = FirstIniFile(iniPath)
 
     fun <T> getValue(section: String, key: String, defaultValue: T): T {
         val cachedValue = deadlineCache.get("$section-$key")
