@@ -7,90 +7,90 @@ DeadlineCache::DeadlineCache(const int& deadline_time, CacheInterface *cache) : 
 string DeadlineCache::GetStringValue(const string& key) {
     auto iter = insert_time.find(key);
     if(iter == insert_time.end()){
-        throw key;
+        throw std::out_of_range(key);
     }
-    if(GetCurrentTimeMs() - iter->second > deadline_time){
+    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
         insert_time.erase(key);
-        throw key;
+        throw std::out_of_range(key);
     }
     return cache->GetStringValue(key);
 }
 
 bool DeadlineCache::SetStringValue(const string& key, const string& value) {
     auto ret = cache->SetStringValue(key,value);
-    insert_time[key] = GetCurrentTimeMs();
+    insert_time[key] = steady_clock::now();
     return ret;
 }
 
 int DeadlineCache::GetIntValue(const string& key) {
     auto iter = insert_time.find(key);
     if(iter == insert_time.end()){
-        throw key;
+        throw std::out_of_range(key);
     }
-    if(GetCurrentTimeMs() - iter->second > deadline_time){
+    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
         insert_time.erase(key);
-        throw key;
+        throw std::out_of_range(key);
     }
     return cache->GetIntValue(key);
 }
 
 bool DeadlineCache::SetIntValue(const string& key, const int& value) {
     auto ret = cache->SetIntValue(key,value);
-    insert_time[key] = GetCurrentTimeMs();
+    insert_time[key] = steady_clock::now();
     return ret;
 }
 
 bool DeadlineCache::GetBoolValue(const string& key) {
     auto iter = insert_time.find(key);
     if(iter == insert_time.end()){
-        throw key;
+        throw std::out_of_range(key);
     }
-    if(GetCurrentTimeMs() - iter->second > deadline_time){
+    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
         insert_time.erase(key);
-        throw key;
+        throw std::out_of_range(key);
     }
     return cache->GetBoolValue(key);
 }
 
 bool DeadlineCache::SetBoolValue(const string& key, const bool& value) {
     auto ret = cache->SetBoolValue(key,value);
-    insert_time[key] = GetCurrentTimeMs();
+    insert_time[key] = steady_clock::now();
     return ret;
 }
 
 double DeadlineCache::GetDoubleValue(const string& key) {
     auto iter = insert_time.find(key);
     if(iter == insert_time.end()){
-        throw key;
+        throw std::out_of_range(key);
     }
-    if(GetCurrentTimeMs() - iter->second > deadline_time){
+    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
         insert_time.erase(key);
-        throw key;
+        throw std::out_of_range(key);
     }
     return cache->GetDoubleValue(key);
 }
 
 bool DeadlineCache::SetDoubleValue(const string& key, const double& value) {
     auto ret = cache->SetDoubleValue(key,value);
-    insert_time[key] = GetCurrentTimeMs();
+    insert_time[key] = steady_clock::now();
     return ret;
 }
 
 long DeadlineCache::GetLongValue(const string& key) {
     auto iter = insert_time.find(key);
     if(iter == insert_time.end()){
-        throw key;
+        throw std::out_of_range(key);
     }
-    if(GetCurrentTimeMs() - iter->second > deadline_time){
+    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
         insert_time.erase(key);
-        throw key;
+        throw std::out_of_range(key);
     }
     return cache->GetLongValue(key);
 }
 
 bool DeadlineCache::SetLongValue(const string& key, const long& value) {
     auto ret = cache->SetLongValue(key,value);
-    insert_time[key] = GetCurrentTimeMs();
+    insert_time[key] = steady_clock::now();
     return ret;
 }
 
@@ -104,12 +104,4 @@ void DeadlineCache::Clear() {
     insert_time.clear();
 }
 
-int64_t DeadlineCache::GetCurrentTimeMs() {
-    struct timeval tv;
-    gettimeofday(&tv,NULL);
-    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
-}
-
-DeadlineCache::~DeadlineCache() {
-
-}
+DeadlineCache::~DeadlineCache() = default;

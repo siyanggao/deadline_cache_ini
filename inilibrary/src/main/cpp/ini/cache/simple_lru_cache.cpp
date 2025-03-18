@@ -5,22 +5,26 @@ SimpleLruCache::SimpleLruCache(const int& max_size) : max_size(max_size){
 }
 
 string SimpleLruCache::GetStringValue(const string& key) {
-    map<string,string>::iterator iter = data_str.find(key);
+    auto iter = data_str.find(key);
     if(iter != data_str.end()){
-        usetime[key] = GetCurrentTime();
+        usetime[key] = steady_clock::now();
         return iter->second;
     }else{
-        throw key;
+        throw std::out_of_range(key);
     }
 }
 
 bool SimpleLruCache::SetStringValue(const string& key, const string& value) {
     data_str[key] = value;
-    usetime[key] = GetCurrentTime();
+    usetime[key] = steady_clock::now();
     while(data_str.size() > max_size){
-        auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
-            return left.second < right.second;
-        });
+        auto min = std::min_element(
+                usetime.begin(),
+                usetime.end(),
+                [](const std::pair<string,steady_clock::time_point>& left,const std::pair<string,steady_clock::time_point>& right){
+                    return left.second < right.second;
+                }
+        );
         data_str.erase(min->first);
         usetime.erase(min->first);
     }
@@ -28,12 +32,12 @@ bool SimpleLruCache::SetStringValue(const string& key, const string& value) {
 }
 
 int SimpleLruCache::GetIntValue(const string& key) {
-    map<string,int>::iterator iter = data_int.find(key);
+    auto iter = data_int.find(key);
     if(iter != data_int.end()){
-        usetime[key] = GetCurrentTime();
+        usetime[key] = steady_clock::now();
         return iter->second;
     }else{
-        throw key;
+        throw std::out_of_range(key);
     }
 }
 
@@ -43,11 +47,15 @@ bool SimpleLruCache::SetIntValue(const string& key, const int& value) {
         return false;
     }
     data_int[key] = value;
-    usetime[key] = GetCurrentTime();
+    usetime[key] = steady_clock::now();
     while(data_int.size() > max_size){
-        auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
-            return left.second < right.second;
-        });
+        auto min = std::min_element(
+                usetime.begin(),
+                usetime.end(),
+                [](const std::pair<string,steady_clock::time_point>& left,const std::pair<string,steady_clock::time_point>& right){
+                    return left.second < right.second;
+                }
+        );
         data_int.erase(min->first);
         usetime.erase(min->first);
     }
@@ -55,22 +63,26 @@ bool SimpleLruCache::SetIntValue(const string& key, const int& value) {
 }
 
 bool SimpleLruCache::GetBoolValue(const string& key) {
-    map<string,bool>::iterator iter = data_bool.find(key);
+    auto iter = data_bool.find(key);
     if(iter != data_bool.end()){
-        usetime[key] = GetCurrentTime();
+        usetime[key] = steady_clock::now();
         return iter->second;
     }else{
-        throw key;
+        throw std::out_of_range(key);
     }
 }
 
 bool SimpleLruCache::SetBoolValue(const string& key, const bool& value) {
     data_bool[key] = value;
-    usetime[key] = GetCurrentTime();
+    usetime[key] = steady_clock::now();
     while(data_bool.size() > max_size){
-        auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
-            return left.second < right.second;
-        });
+        auto min = std::min_element(
+                usetime.begin(),
+                usetime.end(),
+                [](const std::pair<string,steady_clock::time_point>& left,const std::pair<string,steady_clock::time_point>& right){
+                    return left.second < right.second;
+                }
+        );
         data_bool.erase(min->first);
         usetime.erase(min->first);
     }
@@ -78,22 +90,26 @@ bool SimpleLruCache::SetBoolValue(const string& key, const bool& value) {
 }
 
 double SimpleLruCache::GetDoubleValue(const string& key) {
-    map<string,double>::iterator iter = data_double.find(key);
+    auto iter = data_double.find(key);
     if(iter != data_double.end()){
-        usetime[key] = GetCurrentTime();
+        usetime[key] = steady_clock::now();
         return iter->second;
     }else{
-        throw key;
+        throw std::out_of_range(key);
     }
 }
 
 bool SimpleLruCache::SetDoubleValue(const string& key, const double& value) {
     data_double[key] = value;
-    usetime[key] = GetCurrentTime();
+    usetime[key] = steady_clock::now();
     while(data_double.size() > max_size){
-        auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
-            return left.second < right.second;
-        });
+        auto min = std::min_element(
+                usetime.begin(),
+                usetime.end(),
+                [](const std::pair<string,steady_clock::time_point>& left,const std::pair<string,steady_clock::time_point>& right){
+                    return left.second < right.second;
+                }
+        );
         data_double.erase(min->first);
         usetime.erase(min->first);
     }
@@ -101,22 +117,26 @@ bool SimpleLruCache::SetDoubleValue(const string& key, const double& value) {
 }
 
 long SimpleLruCache::GetLongValue(const string& key) {
-    map<string,long>::iterator iter = data_long.find(key);
+    auto iter = data_long.find(key);
     if(iter != data_long.end()){
-        usetime[key] = GetCurrentTime();
+        usetime[key] = steady_clock::now();
         return iter->second;
     }else{
-        throw key;
+        throw std::out_of_range(key);
     }
 }
 
 bool SimpleLruCache::SetLongValue(const string& key, const long& value) {
     data_long[key] = value;
-    usetime[key] = GetCurrentTime();
+    usetime[key] = steady_clock::now();
     while(data_long.size() > max_size){
-        auto min = std::max_element(usetime.begin(),usetime.end(),[](std::pair<string,int> left,std::pair<string,int> right){
-            return left.second < right.second;
-        });
+        auto min = std::min_element(
+                usetime.begin(),
+                usetime.end(),
+                [](const std::pair<string,steady_clock::time_point>& left,const std::pair<string,steady_clock::time_point>& right){
+                    return left.second < right.second;
+                }
+        );
         data_long.erase(min->first);
         usetime.erase(min->first);
     }
@@ -141,14 +161,6 @@ void SimpleLruCache::Clear(){
     usetime.clear();
 }
 
-int SimpleLruCache::GetCurrentTime() {
-    struct timeval tv;
-    gettimeofday(&tv,NULL);
-    return tv.tv_sec;
-}
-
-SimpleLruCache::~SimpleLruCache() {
-
-}
+SimpleLruCache::~SimpleLruCache() = default;
 
 

@@ -3,15 +3,17 @@
 #include <string>
 #include <map>
 #include <sys/time.h>
+#include <chrono>
 #include "cache_interface.h"
 #include "simple_lru_cache.h"
 using std::string;
 using std::map;
+using std::chrono::steady_clock;
 
 class DeadlineCache : public CacheInterface {
 public:
     DeadlineCache(const int& deadline_time, CacheInterface *cache);
-    ~DeadlineCache();
+    ~DeadlineCache() override;
     string GetStringValue(const string& key) override;
     bool SetStringValue(const string& key, const string& value) override;
     int GetIntValue(const string& key) override;
@@ -28,9 +30,7 @@ public:
 private:
     int deadline_time;
     CacheInterface *cache;
-    map<string,int64_t> insert_time;
-
-    int64_t GetCurrentTimeMs();
+    map<string,steady_clock::time_point> insert_time;
 };
 
 

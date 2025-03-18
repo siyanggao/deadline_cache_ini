@@ -2,9 +2,9 @@
 #define INI_SIMPLE_LRU_CACHE_H
 #include <map>
 #include <algorithm>
-#include <sys/time.h>
+#include <chrono>
 #include "cache_interface.h"
-
+using std::chrono::steady_clock;
 using std::map;
 
 class SimpleLruCache : public CacheInterface{
@@ -32,9 +32,7 @@ private:
     map<string,double> data_double;
     map<string,long> data_long;
 
-    map<string,int> usetime;
-
-    int GetCurrentTime();
+    map<string,steady_clock::time_point> usetime;
 
 };
 

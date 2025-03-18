@@ -10,7 +10,7 @@ string IniDataStore::GetStringValue(const string& section, const string& key, co
     try{
         auto cache_value = deadline_cache->GetStringValue(section + "-" + key);
         return cache_value;
-    }catch (string){
+    }catch (std::out_of_range& e){
         string file_value = file_ini->GetStringValue(section,key,default_value);
         deadline_cache->SetStringValue(section + "-" + key, file_value);
         return file_value;
@@ -27,7 +27,7 @@ int IniDataStore::GetIntValue(const string& section, const string& key, const in
     try{
         int cache_value = deadline_cache->GetIntValue(section + "-" + key);
         return cache_value;
-    }catch (string){
+    }catch (std::out_of_range& e){
         int file_value = file_ini->GetIntValue(section,key,default_value);
         deadline_cache->SetIntValue(section + "-" + key, file_value);
         return file_value;
@@ -43,7 +43,7 @@ bool IniDataStore::GetBoolValue(const string& section, const string& key, const 
     try{
         bool cache_value = deadline_cache->GetBoolValue(section + "-" + key);
         return cache_value;
-    }catch (string){
+    }catch (std::out_of_range& e){
         bool file_value = file_ini->GetBoolValue(section,key,default_value);
         deadline_cache->SetBoolValue(section + "-" + key, file_value);
         return file_value;
@@ -59,7 +59,7 @@ double IniDataStore::GetDoubleValue(const string& section, const string& key, co
     try{
         double cache_value = deadline_cache->GetDoubleValue(section + "-" + key);
         return cache_value;
-    }catch (string){
+    }catch (std::out_of_range& e){
         double file_value = file_ini->GetDoubleValue(section,key,default_value);
         deadline_cache->SetDoubleValue(section + "-" + key, file_value);
         return file_value;
@@ -75,7 +75,7 @@ long IniDataStore::GetLongValue(const string& section, const string& key, const 
     try{
         long cache_value = deadline_cache->GetLongValue(section + "-" + key);
         return cache_value;
-    }catch (string){
+    }catch (std::out_of_range& e){
         long file_value = file_ini->GetLongValue(section,key,default_value);
         deadline_cache->SetLongValue(section + "-" + key, file_value);
         return file_value;
@@ -87,7 +87,6 @@ bool IniDataStore::SetLongValue(const string& section, const string& key, const 
     return file_ini->SetLongValue(section,key,value);
 }
 
-
 bool IniDataStore::EraseValue(const string& section, const string& key) {
     deadline_cache->EraseValue(section + "-" + key);
     return file_ini->EraseValue(section,key);
@@ -95,9 +94,11 @@ bool IniDataStore::EraseValue(const string& section, const string& key) {
 
 bool IniDataStore::ResetCache(const string& section,const string& key){
     deadline_cache->EraseValue(section + "-" + key);
+    return true;
 }
 bool IniDataStore::ResetCache(){
     deadline_cache->Clear();
+    return true;
 }
 
 IniDataStore::~IniDataStore() {

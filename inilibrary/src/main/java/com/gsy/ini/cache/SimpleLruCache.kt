@@ -7,7 +7,7 @@ class SimpleLruCache(private val maxSize:Int = 100) : CacheInterface {
     override fun get(key: String): Any? {
         val ret = data[key]
         return if(ret != null){
-            useTime[key] = System.currentTimeMillis()
+            useTime[key] = System.nanoTime()/1000/1000
             ret
         }else{
             null
@@ -16,7 +16,7 @@ class SimpleLruCache(private val maxSize:Int = 100) : CacheInterface {
 
     override fun put(key: String, value: Any) {
         data[key] = value
-        useTime[key] = System.currentTimeMillis()
+        useTime[key] = System.nanoTime()/1000/1000
         while(data.size > maxSize){
             val min = useTime.minWithOrNull { o1, o2 ->
                 when {
