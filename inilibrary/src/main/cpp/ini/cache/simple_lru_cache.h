@@ -3,6 +3,7 @@
 #include <map>
 #include <algorithm>
 #include <chrono>
+#include <stdexcept>
 #include "cache_interface.h"
 using std::chrono::steady_clock;
 using std::map;

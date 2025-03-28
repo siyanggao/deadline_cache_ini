@@ -2,8 +2,8 @@
 #define INI_DEADLINE_CACHE_H
 #include <string>
 #include <map>
-#include <sys/time.h>
 #include <chrono>
+#include <stdexcept>
 #include "cache_interface.h"
 #include "simple_lru_cache.h"
 using std::string;

@@ -9,7 +9,7 @@ string DeadlineCache::GetStringValue(const string& key) {
     if(iter == insert_time.end()){
         throw std::out_of_range(key);
     }
-    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
+    if(steady_clock::now() - iter->second > std::chrono::milliseconds(deadline_time)){
         insert_time.erase(key);
         throw std::out_of_range(key);
     }
@@ -27,7 +27,7 @@ int DeadlineCache::GetIntValue(const string& key) {
     if(iter == insert_time.end()){
         throw std::out_of_range(key);
     }
-    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
+    if(steady_clock::now() - iter->second > std::chrono::milliseconds(deadline_time)){
         insert_time.erase(key);
         throw std::out_of_range(key);
     }
@@ -45,7 +45,7 @@ bool DeadlineCache::GetBoolValue(const string& key) {
     if(iter == insert_time.end()){
         throw std::out_of_range(key);
     }
-    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
+    if(steady_clock::now() - iter->second > std::chrono::milliseconds(deadline_time)){
         insert_time.erase(key);
         throw std::out_of_range(key);
     }
@@ -63,7 +63,7 @@ double DeadlineCache::GetDoubleValue(const string& key) {
     if(iter == insert_time.end()){
         throw std::out_of_range(key);
     }
-    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
+    if(steady_clock::now() - iter->second > std::chrono::milliseconds(deadline_time)){
         insert_time.erase(key);
         throw std::out_of_range(key);
     }
@@ -81,7 +81,7 @@ long DeadlineCache::GetLongValue(const string& key) {
     if(iter == insert_time.end()){
         throw std::out_of_range(key);
     }
-    if(steady_clock::now() - iter->second > std::chrono::microseconds(deadline_time)){
+    if(steady_clock::now() - iter->second > std::chrono::milliseconds(deadline_time)){
         insert_time.erase(key);
         throw std::out_of_range(key);
     }
